@@ -18,7 +18,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-#git 測試1
 #git 測試2
 
 pygame.quit()

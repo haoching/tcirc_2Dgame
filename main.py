@@ -22,4 +22,3 @@ while running:
     pygame.display.update()
 
 pygame.quit()
-#測試

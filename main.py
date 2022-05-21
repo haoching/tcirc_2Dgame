@@ -5,7 +5,7 @@ FPS = 60
 pygame.init()
 
 ctypes.windll.user32.SetProcessDPIAware()
-pygame.display.set_mode((1920,1080))
+screen = pygame.display.set_mode((1920,1080))
 
 clock = pygame.time.Clock()
 
@@ -18,6 +18,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-#git 測試2
+    screen.fill((255,0,0))
+    pygame.display.update()
 
 pygame.quit()

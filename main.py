@@ -18,7 +18,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill((80,0,180))
+    screen.fill((135,206,235))
     pygame.display.update()
 
 pygame.quit()

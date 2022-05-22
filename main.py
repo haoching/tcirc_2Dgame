@@ -15,6 +15,7 @@ pygame.display.set_caption("電研成發第二組")
 
 clock = pygame.time.Clock()
 
+#物理
 jump_speed = 80
 player_speed = 15
 gravity = 5
@@ -24,6 +25,7 @@ player_1_width = 100
 
 player_1_speed_y=jump_speed
 player_1_jumping=False
+
 class Player_1(pygame.sprite.Sprite):
     jumping = False
     player_1_speed_y = 100

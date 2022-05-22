@@ -16,10 +16,12 @@ pygame.display.set_caption("電研成發第二組")
 
 clock = pygame.time.Clock()
 #載入圖片
-background_img_0 = pygame.image.load(os.path.join("img","background mountain 2.webp")).convert()
+background_img_0 = pygame.image.load(os.path.join("img","background_mountain.png")).convert()
 background_img_1 = pygame.image.load(os.path.join("img","background_SAO.jpg")).convert()
 background_img_2 = pygame.image.load(os.path.join("img","background_tcfsh.jpg")).convert()
 background_img_3 = pygame.image.load(os.path.join("img","background_night.jpg")).convert()
+
+
 #物理
 jump_speed = 80
 player_speed = 15

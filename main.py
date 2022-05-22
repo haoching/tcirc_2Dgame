@@ -15,6 +15,8 @@ screen = pygame.display.set_mode((screen_width, screen_high))
 pygame.display.set_caption("電研成發第二組")
 
 clock = pygame.time.Clock()
+#載入圖片
+background_img = pygame.image.load(os.path.join("img","background mountain 2.webp")).convert()
 
 #物理
 jump_speed = 80
@@ -116,8 +118,9 @@ while running:
     if pygame.key.get_pressed()[pygame.K_w]:
         player_1.jumping = True
     all_sprites.update()
-    #
+    #畫面顯示
     screen.fill((135, 206, 235))
+    screen.blit(background_img , (0,0))
     all_sprites.draw(screen)
     pygame.display.update()
 

@@ -93,7 +93,7 @@ class Player_2(pygame.sprite.Sprite):
             player_2_jumping = False
             player_2_speed_y = jump_speed
         #邊界判斷
-        if self.rect.x >= screen_width:
+        if self.rect.x >= screen_width-player_2_width:
             self.rect.x = screen_width-player_2_width
         if self.rect.x <= 0:
             self.rect.x = 0     

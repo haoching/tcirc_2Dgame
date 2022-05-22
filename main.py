@@ -1,5 +1,6 @@
 import pygame
 import ctypes
+import random
 
 FPS = 60
 

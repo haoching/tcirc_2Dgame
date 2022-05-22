@@ -1,8 +1,8 @@
-from re import T
 import pygame
 import ctypes
 import random
 import os
+
 
 FPS = 60
 
@@ -21,12 +21,11 @@ jump_speed = 80
 player_speed = 15
 gravity = 5
 
+
 player_1_high = 200
 player_1_width = 100
-
 player_1_speed_y=jump_speed
 player_1_jumping=False
-
 class Player_1(pygame.sprite.Sprite):
     jumping = False
     player_1_speed_y = 100
@@ -61,10 +60,8 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x = 0    
 
 
-
 player_2_high = 200
 player_2_width = 100
-
 player_2_speed_y=jump_speed
 player_2_jumping=False
 class Player_2(pygame.sprite.Sprite):
@@ -120,12 +117,9 @@ while running:
         player_1.jumping = True
     all_sprites.update()
     #
-    
-    
     screen.fill((135, 206, 235))
     all_sprites.draw(screen)
     pygame.display.update()
 
 
 pygame.quit()
-

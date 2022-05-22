@@ -1,3 +1,4 @@
+from re import T
 import pygame
 import ctypes
 import random
@@ -14,12 +15,15 @@ pygame.display.set_caption("電研成發第二組")
 
 clock = pygame.time.Clock()
 
+jump_speed = 80
+player_speed = 15
+gravity = 5
 
-
-player_1_speed_y=0
 player_1_high = 200
 player_1_width = 100
-jumping=False
+
+player_1_speed_y=jump_speed
+player_1_jumping=False
 class Player_1(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -30,19 +34,29 @@ class Player_1(pygame.sprite.Sprite):
         self.rect.y=screen_high-player_1_high
 
     def update(self):
+        global player_1_speed_y
+        global player_1_jumping
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_a]:
-            self.rect.x -= 10
+            self.rect.x -= player_speed
         if key_pressed[pygame.K_d]:
-            self.rect.x += 10
+            self.rect.x += player_speed
         if key_pressed[pygame.K_w]:
-            jumping=True
+            player_1_jumping = True
+        if player_1_jumping:
+            self.rect.y-=player_1_speed_y
+            player_1_speed_y-=gravity
+        if self.rect.y>=screen_high-player_1_high:
+            player_1_jumping = False
+            player_1_speed_y = jump_speed
 
 
-player_2_speed_y=0
+
 player_2_high = 200
 player_2_width = 100
-jumping=False
+
+player_2_speed_y=jump_speed
+player_2_jumping=False
 class Player_2(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -53,19 +67,22 @@ class Player_2(pygame.sprite.Sprite):
         self.rect.y=screen_high-player_1_high
 
     def update(self):
+        global player_2_speed_y
+        global player_2_jumping
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_j]:
-            self.rect.x -= 10
+            self.rect.x -= player_speed
         if key_pressed[pygame.K_l]:
-            self.rect.x += 10
+            self.rect.x += player_speed
         if key_pressed[pygame.K_i]:
-            jumping=True
+            player_2_jumping=True
+        if player_2_jumping:
+            self.rect.y-=player_2_speed_y
+            player_2_speed_y-=gravity
+        if self.rect.y>=screen_high-player_2_high:
+            player_2_jumping = False
+            player_2_speed_y = jump_speed
                         
-
-
-
-            
-
 
 all_sprites = pygame.sprite.Group()
 player_1 = Player_1()
@@ -86,6 +103,8 @@ while running:
 
     all_sprites.update()
     #
+    
+    
     screen.fill((135, 206, 235))
     all_sprites.draw(screen)
     pygame.display.update()

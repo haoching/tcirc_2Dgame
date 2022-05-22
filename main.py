@@ -2,6 +2,7 @@ from re import T
 import pygame
 import ctypes
 import random
+import os
 
 FPS = 60
 
@@ -32,7 +33,7 @@ class Player_1(pygame.sprite.Sprite):
         self.image = pygame.Surface((player_1_width, player_1_high))
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.x = screen_width/2
+        self.rect.x = screen_width/3
         self.rect.y = screen_high-player_1_high
 
     def update(self):
@@ -51,6 +52,10 @@ class Player_1(pygame.sprite.Sprite):
         if self.rect.y>=screen_high-player_1_high:
             player_1_jumping = False
             player_1_speed_y = jump_speed
+        if self.rect.x > screen_width:
+            self.rect.x = screen_width
+        if self.rect.x < 0:
+            self.rect.x = 0    
 
 
 
@@ -65,7 +70,7 @@ class Player_2(pygame.sprite.Sprite):
         self.image = pygame.Surface((player_2_width, player_2_high))
         self.image.fill((0, 0, 0))
         self.rect = self.image.get_rect()
-        self.rect.x=screen_width/2
+        self.rect.x=screen_width
         self.rect.y=screen_high-player_1_high
 
     def update(self):
@@ -84,6 +89,10 @@ class Player_2(pygame.sprite.Sprite):
         if self.rect.y>=screen_high-player_2_high:
             player_2_jumping = False
             player_2_speed_y = jump_speed
+        if self.rect.x > screen_width:
+            self.rect.x = screen_width
+        if self.rect.x < 0:
+            self.rect.x = 0     
                         
 
 all_sprites = pygame.sprite.Group()
@@ -115,3 +124,4 @@ while running:
 
 
 pygame.quit()
+

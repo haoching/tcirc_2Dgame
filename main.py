@@ -17,7 +17,7 @@ clock = pygame.time.Clock()
 
 
 player_1_speed_y=0
-player_1_high = 100
+player_1_high = 200
 player_1_width = 100
 jumping=False
 class Player_1(pygame.sprite.Sprite):
@@ -37,12 +37,41 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x += 10
         if key_pressed[pygame.K_w]:
             jumping=True
+
+
+player_2_speed_y=0
+player_2_high = 200
+player_2_width = 100
+jumping=False
+class Player_2(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface((player_2_width, player_2_high))
+        self.image.fill((0, 0, 0))
+        self.rect = self.image.get_rect()
+        self.rect.x=screen_width/2
+        self.rect.y=screen_high-player_1_high
+
+    def update(self):
+        key_pressed = pygame.key.get_pressed()
+        if key_pressed[pygame.K_j]:
+            self.rect.x -= 10
+        if key_pressed[pygame.K_l]:
+            self.rect.x += 10
+        if key_pressed[pygame.K_i]:
+            jumping=True
+                        
+
+
+
             
 
 
 all_sprites = pygame.sprite.Group()
 player_1 = Player_1()
 all_sprites.add(player_1)
+player_2 = Player_2()
+all_sprites.add(player_2)
 
 running = True
 

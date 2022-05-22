@@ -15,16 +15,19 @@ pygame.display.set_caption("電研成發第二組")
 clock = pygame.time.Clock()
 
 
+
+player_1_jumping=False
+player_1_speed_y=0
+player_1_high = 100
+player_1_width = 100
 class Player_1(pygame.sprite.Sprite):
     def __init__(self):
-        high = 100
-        width = 100
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((width, high))
+        self.image = pygame.Surface((player_1_width, player_1_high))
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
         self.rect.x=screen_width/2
-        self.rect.y=screen_high-high
+        self.rect.y=screen_high-player_1_high
 
     def update(self):
         key_pressed = pygame.key.get_pressed()
@@ -32,6 +35,16 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x -= 10
         if key_pressed[pygame.K_d]:
             self.rect.x += 10
+        
+        if key_pressed[pygame.K_w]:
+            player_1_jumping=True
+            player_1_speed_y+=100
+        if player_1_jumping:
+            if self.rect.y>=player_1_high
+                player_1_speed_y=0
+                player_1_jumping=False
+            self.rect.y+=player_1_speed_y
+            
 
 
 all_sprites = pygame.sprite.Group()
@@ -46,7 +59,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     #
-
     all_sprites.update()
     #
     screen.fill((135, 206, 235))

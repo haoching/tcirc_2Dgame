@@ -35,7 +35,7 @@ class Player_1(pygame.sprite.Sprite):
         self.image = pygame.Surface((player_1_width, player_1_high))
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.x = screen_width/3
+        self.rect.x = screen_width/3-player_1_width#對稱
         self.rect.y = screen_high-player_1_high
 
     def update(self):
@@ -73,7 +73,7 @@ class Player_2(pygame.sprite.Sprite):
         self.image = pygame.Surface((player_2_width, player_2_high))
         self.image.fill((0, 0, 0))
         self.rect = self.image.get_rect()
-        self.rect.x=screen_width
+        self.rect.x=screen_width/3*2
         self.rect.y=screen_high-player_1_high
 
     def update(self):

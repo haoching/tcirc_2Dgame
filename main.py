@@ -54,9 +54,10 @@ class Player_1(pygame.sprite.Sprite):
         if self.rect.y>=screen_high-player_1_high:
             player_1_jumping = False
             player_1_speed_y = jump_speed
-        if self.rect.x > screen_width:
-            self.rect.x = screen_width
-        if self.rect.x < 0:
+        #邊界判斷
+        if self.rect.x >= screen_width-player_1_width:
+            self.rect.x = screen_width-player_1_width
+        if self.rect.x <= 0:
             self.rect.x = 0    
 
 
@@ -91,9 +92,10 @@ class Player_2(pygame.sprite.Sprite):
         if self.rect.y>=screen_high-player_2_high:
             player_2_jumping = False
             player_2_speed_y = jump_speed
-        if self.rect.x > screen_width:
-            self.rect.x = screen_width
-        if self.rect.x < 0:
+        #邊界判斷
+        if self.rect.x >= screen_width:
+            self.rect.x = screen_width-player_2_width
+        if self.rect.x <= 0:
             self.rect.x = 0     
                         
 

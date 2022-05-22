@@ -1,4 +1,8 @@
 from re import T
+<<<<<<< Updated upstream
+=======
+from sre_constants import JUMP
+>>>>>>> Stashed changes
 import pygame
 import ctypes
 import random
@@ -19,19 +23,29 @@ jump_speed = 80
 player_speed = 15
 gravity = 5
 
+<<<<<<< Updated upstream
 player_1_high = 200
 player_1_width = 100
 
 player_1_speed_y=jump_speed
 player_1_jumping=False
+=======
+player_1_high = 100
+player_1_width = 100
+
+
+
+>>>>>>> Stashed changes
 class Player_1(pygame.sprite.Sprite):
+    jumping = False
+    player_1_speed_y = 100
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((player_1_width, player_1_high))
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.x=screen_width/2
-        self.rect.y=screen_high-player_1_high
+        self.rect.x = screen_width/2
+        self.rect.y = screen_high-player_1_high
 
     def update(self):
         global player_1_speed_y
@@ -40,6 +54,7 @@ class Player_1(pygame.sprite.Sprite):
         if key_pressed[pygame.K_a]:
             self.rect.x -= player_speed
         if key_pressed[pygame.K_d]:
+<<<<<<< Updated upstream
             self.rect.x += player_speed
         if key_pressed[pygame.K_w]:
             player_1_jumping = True
@@ -51,6 +66,16 @@ class Player_1(pygame.sprite.Sprite):
             player_1_speed_y = jump_speed
 
 
+=======
+            self.rect.x += 10
+        if self.jumping:
+            self.rect.y -= player_1_speed_y
+            player_1_speed_y -= 25
+        if self.rect.y >= player_1_high:
+            jumping=False
+            player_1_speed_y=100
+        
+>>>>>>> Stashed changes
 
 player_2_high = 200
 player_2_width = 100
@@ -92,6 +117,7 @@ all_sprites.add(player_2)
 
 running = True
 
+
 while running:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -100,7 +126,8 @@ while running:
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             running = False
     #
-
+    if pygame.key.get_pressed()[pygame.K_w]:
+        player_1.jumping = True
     all_sprites.update()
     #
     

@@ -30,10 +30,10 @@ background_img_3 = pygame.image.load(os.path.join("img","background_night.jpg"))
 background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fullsize.jpg")).convert()
 
 #載入音樂
-pygame.mixer.music.load(os.path.join("sound","background.ogg"))
+#pygame.mixer.music.load(os.path.join("sound","background.ogg"))
 #pygame.mixer.music.load(os.path.join("sound","14620.mp3"))
-pygame.mixer.music.set_volume(0.5)
-pygame.mixer.music.play(-1)
+#pygame.mixer.music.set_volume(0.5)
+#pygame.mixer.music.play(-1)
 
 #物理
 jump_speed = 85

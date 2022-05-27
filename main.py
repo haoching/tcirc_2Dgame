@@ -5,6 +5,10 @@ import os
 
 
 FPS = 60
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+
 
 # 初始化
 pygame.init()
@@ -14,6 +18,7 @@ screen_width = 1920
 screen_high = 1080
 screen = pygame.display.set_mode((screen_width, screen_high))
 pygame.display.set_caption("電研成發第二組")
+score = 0
 
 clock = pygame.time.Clock()
 
@@ -25,16 +30,63 @@ background_img_3 = pygame.image.load(os.path.join("img","background_night.jpg"))
 background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fullsize.jpg")).convert()
 
 #載入音樂
-#pygame.mixer.music.load(os.path.join("sound","background.ogg"))
-#pygame.mixer.music.set_volume(0.5)
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.load(os.path.join("sound","background.ogg"))
+#pygame.mixer.music.load(os.path.join("sound","14620.mp3"))
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
 
 #物理
 jump_speed = 85
 player_speed = 20
 gravity = 5
 
+#血條玩家一(做完生命值和碰撞後再放入變數)
+def draw_blood(surf, 某生命值變數, x, y):
+    if 某生命值變數 < 0:
+        某生命值變數 = 0
+    line_LENGTH = 100
+    line_HEIGHT = 10
+    fill = (某生命值變數/100)*line_LENGTH
+    outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
+    fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
+    pygame.draw.rect(surf, GREEN, fill_rect)
+    pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
+
+#血條玩家二(做完生命值和碰撞後再放入變數)
+def draw_blood(surf, 某生命值變數, x, y):
+    if 某生命值變數 < 0:
+        某生命值變數 = 0
+    line_LENGTH = 100
+    line_HEIGHT = 10
+    fill = (某生命值變數/100)*line_LENGTH
+    outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
+    fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
+    pygame.draw.rect(surf, GREEN, fill_rect)
+    pygame.draw.rect(surf, WHITE, outline_rect, 2)  
+
+#分數玩家一(有變數再加入)
+font_name = pygame.font.match_font('arial')
+def draw_score(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, WHITE)
+    text_rect = text_surface.get_rect()
+    text_rect.centerx = x
+    text_rect.top = y
+    surf.blit(text_surface, text_rect)
+
+#分數玩家一(有變數再加入)
+font_name = pygame.font.match_font('arial')
+def draw_score(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, WHITE)
+    text_rect = text_surface.get_rect()
+    text_rect.centerx = x
+    text_rect.top = y
+    surf.blit(text_surface, text_rect)    
+
+
+#玩家1運動
 player_1_high = 200
 player_1_width = 100
 player_1_speed_y=jump_speed
@@ -49,6 +101,7 @@ class Player_1(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = screen_width/3-player_1_width#對稱
         self.rect.y = screen_high-player_1_high
+        self.health = 100
 
     def update(self):
         global player_1_speed_y
@@ -73,6 +126,7 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x = 0    
 
 
+#玩家2運動
 player_2_high = 200
 player_2_width = 100
 player_2_speed_y=jump_speed
@@ -134,6 +188,8 @@ while running:
     screen.blit(background_img_4 , (0,0))
     all_sprites.draw(screen)
     pygame.display.update()
+    #draw_score(screen, str(score), 15, WIDTH/3, 10)
+    #draw_blood(screen, 某血量變數, 5, 15)
 
 
 pygame.quit()

@@ -22,15 +22,16 @@ background_img_0 = pygame.image.load(os.path.join("img","background_mountain.png
 background_img_1 = pygame.image.load(os.path.join("img","background_SAO.jpg")).convert()
 background_img_2 = pygame.image.load(os.path.join("img","background_tcfsh.jpg")).convert()
 background_img_3 = pygame.image.load(os.path.join("img","background_night.jpg")).convert()
+background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fullsize.jpg")).convert()
 
 #載入音樂
-pygame.mixer.music.load(os.path.join("sound","background.ogg"))
-pygame.mixer.music.set_volume(0.5)
-pygame.mixer.music.play(-1)
+#pygame.mixer.music.load(os.path.join("sound","background.ogg"))
+#pygame.mixer.music.set_volume(0.5)
+#pygame.mixer.music.play(-1)
 
 #物理
-jump_speed = 80
-player_speed = 15
+jump_speed = 85
+player_speed = 20
 gravity = 5
 
 
@@ -130,7 +131,7 @@ while running:
     all_sprites.update()
     #畫面顯示
     screen.fill((135, 206, 235))
-    screen.blit(background_img_1 , (0,0))
+    screen.blit(background_img_4 , (0,0))
     all_sprites.draw(screen)
     pygame.display.update()
 

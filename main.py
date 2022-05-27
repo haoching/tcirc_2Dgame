@@ -185,7 +185,7 @@ while running:
     all_sprites.update()
     #畫面顯示
     screen.fill((135, 206, 235))
-    screen.blit(background_img_4 , (0,0))
+    screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
     pygame.display.update()
     #draw_score(screen, str(score), 15, WIDTH/3, 10)

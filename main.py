@@ -48,7 +48,7 @@ def draw_text(surf, text, size, x, y):
 
 #初始
 def draw_start():
-    screen.blit(background_umamusume_fullsize.jpg, (0,0))
+    screen.blit(background_img_4, (0,0))
     draw_text(screen, 'i dont know', 70, screen_width/2, screen_high/4)
     draw_text(screen, '按任意鍵start!', 20, screen_width/2, screen_high*3/4)
     pygame.display.update()

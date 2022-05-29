@@ -81,18 +81,17 @@ def draw_blood(surf, HP1, x, y):
     pygame.draw.rect(surf, GREEN, fill_rect)
     pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
-
 #血條玩家二(做完生命值和碰撞後再放入變數)
 def draw_blood(surf, HP2, x, y):
     if HP2 < 0:
         HP2 = 0
-    line_LENGTH = 100
+    line_LENGTH = 300
     line_HEIGHT = 10
     fill = (HP2/100)*line_LENGTH
     outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
     fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
     pygame.draw.rect(surf, GREEN, fill_rect)
-    pygame.draw.rect(surf, WHITE, outline_rect, 2)  
+    pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
 #分數玩家一(有變數再加入)
 font_name = pygame.font.match_font('arial')
@@ -139,9 +138,10 @@ while running:
     screen.fill((135, 206, 235))
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
-    pygame.display.update()
     draw_score(screen, str(score), 15, screen_width/3, 10)
     draw_blood(screen, 100, 5, 15)
 
+    pygame.display.update()
+    
 
 pygame.quit()

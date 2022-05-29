@@ -31,10 +31,10 @@ background_img_3 = pygame.image.load(os.path.join("img","background_night.jpg"))
 background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fullsize.jpg")).convert()
 
 #載入音樂
-#pygame.mixer.music.load(os.path.join("sound","background.ogg"))
+pygame.mixer.music.load(os.path.join("sound","background.ogg"))
 #pygame.mixer.music.load(os.path.join("sound","14620.mp3"))
-#pygame.mixer.music.set_volume(0.5)
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
 
 
 #繪圖
@@ -132,6 +132,7 @@ class Player_1(pygame.sprite.Sprite):
     def update(self):
         global player_1_speed_y
         global player_1_jumping
+
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_a]:
             self.rect.x -= player_speed
@@ -207,17 +208,16 @@ while running:
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             running = False
     #
-    if pygame.key.get_pressed()[pygame.K_w]:
-        player_1.jumping = True
     all_sprites.update()
     
+
     #畫面顯示
     screen.fill((135, 206, 235))
     screen.blit(background_img_4 , (0,0))
     all_sprites.draw(screen)
     pygame.display.update()
-    draw_score(screen, str(score), 15, WIDTH/3, 10)
-    draw_blood(screen, 某血量變數, 5, 15)
+    draw_score(screen, str(score), 15, screen_width/3, 10)
+    #draw_blood(screen, 100, 5, 15)
 
 
 pygame.quit()

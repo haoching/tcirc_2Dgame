@@ -171,7 +171,7 @@ all_sprites.add(player_2)
 
 running = True
 
-
+#遊戲迴圈
 while running:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -183,13 +183,14 @@ while running:
     if pygame.key.get_pressed()[pygame.K_w]:
         player_1.jumping = True
     all_sprites.update()
+    
     #畫面顯示
     screen.fill((135, 206, 235))
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
     pygame.display.update()
-    #draw_score(screen, str(score), 15, WIDTH/3, 10)
-    #draw_blood(screen, 某血量變數, 5, 15)
+    draw_score(screen, str(score), 15, WIDTH/3, 10)
+    draw_blood(screen, 某血量變數, 5, 15)
 
 
 pygame.quit()

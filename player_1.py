@@ -7,7 +7,6 @@ screen_high = 1080
 jump_speed = 85
 player_speed = 20
 gravity = 5
-#test
 
 #玩家1運動
 player_1_high = 200

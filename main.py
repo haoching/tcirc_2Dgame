@@ -20,6 +20,7 @@ screen = pygame.display.set_mode((screen_width, screen_high))
 pygame.display.set_caption("電研成發第二組")
 score = 0
 
+
 clock = pygame.time.Clock()
 
 #載入圖片
@@ -34,6 +35,31 @@ background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fu
 #pygame.mixer.music.load(os.path.join("sound","14620.mp3"))
 #pygame.mixer.music.set_volume(0.5)
 #pygame.mixer.music.play(-1)
+
+
+#繪圖
+def draw_text(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, WHITE)
+    text_rect = text_surface.get_rect()
+    text_rect.centerx = x
+    text_rect.top = y
+    surf.blit(text_surface, text_rect)
+
+#初始
+def draw_start():
+    screen.blit(background_umamusume_fullsize.jpg, (0,0))
+    draw_text(screen, 'i dont know', 70, WIDTH/2, HEIGHT/4)
+    draw_text(screen, '按任意鍵start!', 20, WIDTH/2, HEIGHT*3/4)
+    pygame.display.update()
+    
+    waiting = True
+    while waiting:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYUP:
+                waiting = False
+                return False
 
 #物理
 jump_speed = 85
@@ -171,6 +197,7 @@ all_sprites.add(player_2)
 
 running = True
 
+
 #遊戲迴圈
 while running:
     clock.tick(FPS)
@@ -186,7 +213,7 @@ while running:
     
     #畫面顯示
     screen.fill((135, 206, 235))
-    screen.blit(background_img_1 , (0,0))
+    screen.blit(background_img_4 , (0,0))
     all_sprites.draw(screen)
     pygame.display.update()
     draw_score(screen, str(score), 15, WIDTH/3, 10)

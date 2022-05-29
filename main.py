@@ -140,8 +140,8 @@ while running:
     all_sprites.draw(screen)
     draw_score(screen, str(score), 15, screen_width/3, 10)
     draw_blood(screen, 100, 5, 15)
-
     pygame.display.update()
     
+    #test
 
 pygame.quit()

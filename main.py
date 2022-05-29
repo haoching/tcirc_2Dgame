@@ -20,6 +20,8 @@ screen_high = 1080
 screen = pygame.display.set_mode((screen_width, screen_high))
 pygame.display.set_caption("電研成發第二組")
 score = 0
+HP1 = 100
+HP2 = 100
 
 
 clock = pygame.time.Clock()

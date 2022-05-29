@@ -67,12 +67,12 @@ player_speed = 20
 gravity = 5
 
 #血條玩家一(做完生命值和碰撞後再放入變數)
-def draw_blood(surf, 某生命值變數, x, y):
-    if 某生命值變數 < 0:
-        某生命值變數 = 0
+def draw_blood(surf, HP1, x, y):
+    if HP1 < 0:
+        HP1 = 0
     line_LENGTH = 100
     line_HEIGHT = 10
-    fill = (某生命值變數/100)*line_LENGTH
+    fill = (HP1/100)*line_LENGTH
     outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
     fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
     pygame.draw.rect(surf, GREEN, fill_rect)
@@ -80,12 +80,12 @@ def draw_blood(surf, 某生命值變數, x, y):
 
 
 #血條玩家二(做完生命值和碰撞後再放入變數)
-def draw_blood(surf, 某生命值變數, x, y):
-    if 某生命值變數 < 0:
-        某生命值變數 = 0
+def draw_blood(surf, HP2, x, y):
+    if HP2 < 0:
+        HP2 = 0
     line_LENGTH = 100
     line_HEIGHT = 10
-    fill = (某生命值變數/100)*line_LENGTH
+    fill = (HP2/100)*line_LENGTH
     outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
     fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
     pygame.draw.rect(surf, GREEN, fill_rect)

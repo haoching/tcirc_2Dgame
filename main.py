@@ -19,7 +19,7 @@ screen_width = 1920
 screen_high = 1080
 screen = pygame.display.set_mode((screen_width, screen_high))
 pygame.display.set_caption("電研成發第二組")
-score = 0
+score = 69
 HP1 = 100
 HP2 = 100
 
@@ -138,7 +138,7 @@ while running:
     screen.fill((135, 206, 235))
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
-    draw_score(screen, str(score), 15, screen_width/3, 10)
+    draw_score(screen, str(score), 100, screen_width/3, 10)
     draw_blood(screen, 100, 5, 15)
     pygame.display.update()
     

@@ -166,6 +166,7 @@ class Player_2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x=screen_width/3*2
         self.rect.y=screen_high-player_1_high
+        self.health = 100
 
     def update(self):
         global player_2_speed_y

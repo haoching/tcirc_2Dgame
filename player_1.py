@@ -1,8 +1,14 @@
 import pygame
+import socket
 
 screen_width = 1920
 screen_high = 1080
 
+#socket
+HOST = '127.0.0.1'
+PORT = 7000
+server_addr = (HOST, PORT)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 #物理
 jump_speed = 85
 player_speed = 20
@@ -47,5 +53,9 @@ class Player_1(pygame.sprite.Sprite):
         if self.rect.x >= screen_width-player_1_width:
             self.rect.x = screen_width-player_1_width
         if self.rect.x <= 0:
-            self.rect.x = 0    
-
+            self.rect.x = 0
+        data = ""
+        data += str(self.rect.x).zfill(4)
+        data += str(self.rect.y).zfill(4)
+        data += "f"
+        s.sendto(data.encode(), server_addr)

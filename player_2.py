@@ -42,5 +42,5 @@ class Player_2(pygame.sprite.Sprite):
         if self.rect.x >= screen_width-player_2_width:
             self.rect.x = screen_width-player_2_width
         if self.rect.x <= 0:
-            self.rect.x = 0     
+            self.rect.x = 0
                         

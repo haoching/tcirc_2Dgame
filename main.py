@@ -25,7 +25,8 @@ screen_width = 1920
 screen_high = 1080
 screen = pygame.display.set_mode((screen_width, screen_high))
 pygame.display.set_caption("電研成發第二組")
-score = 69
+score1 = 0
+score2 = 0
 HP1 = 100
 HP2 = 100
 
@@ -57,7 +58,7 @@ def draw_text(surf, text, size, x, y):
 
 #初始
 def draw_start():
-    screen.blit(background_img_4, (0,0))
+    screen.blit(background_umamusume.jpg, (0,0))
     draw_text(screen, 'SAO 格鬥遊戲', 70, screen_width/2, screen_high/4)
     draw_text(screen, '按任意鍵start!', 20, screen_width/2, screen_high*3/4)
     pygame.display.update()
@@ -79,31 +80,31 @@ gravity = 5
 def draw_blood(surf, HP1, x, y):
     if HP1 < 0:
         HP1 = 0
-    line_LENGTH = 100
-    line_HEIGHT = 10
+    line_LENGTH = 300
+    line_HEIGHT = 20
     fill = (HP1/100)*line_LENGTH
     outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
     fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
-    pygame.draw.rect(surf, GREEN, fill_rect)
+    pygame.draw.rect(surf, RED, fill_rect)
     pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
 #血條玩家二(做完生命值和碰撞後再放入變數)
-def draw_blood(surf, HP2, x, y):
+def draw_blood2(surf, HP2, x, y):
     if HP2 < 0:
         HP2 = 0
     line_LENGTH = 300
-    line_HEIGHT = 10
+    line_HEIGHT = 20
     fill = (HP2/100)*line_LENGTH
     outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
     fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
-    pygame.draw.rect(surf, GREEN, fill_rect)
+    pygame.draw.rect(surf, RED, fill_rect)
     pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
 #分數玩家一(有變數再加入)
 font_name = pygame.font.match_font('arial')
 def draw_score(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
-    text_surface = font.render(text, True, WHITE)
+    text_surface = font.render(text, True, GREEN)
     text_rect = text_surface.get_rect()
     text_rect.centerx = x
     text_rect.top = y
@@ -111,9 +112,9 @@ def draw_score(surf, text, size, x, y):
 
 #分數玩家一(有變數再加入)
 font_name = pygame.font.match_font('arial')
-def draw_score(surf, text, size, x, y):
+def draw_score2(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
-    text_surface = font.render(text, True, WHITE)
+    text_surface = font.render(text, True, GREEN)
     text_rect = text_surface.get_rect()
     text_rect.centerx = x
     text_rect.top = y
@@ -144,8 +145,10 @@ while running:
     screen.fill((135, 206, 235))
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
-    draw_score(screen, str(score), 100, screen_width/3, 40)
+    draw_score(screen, str(score1), 100, screen_width/3, 40)
+    draw_score2(screen, str(score2), 100, screen_width/1.5, 40)
     draw_blood(screen, 100, 5, 15)
+    draw_blood2(screen, 100, 1610, 15)
     pygame.display.update()
     
 pygame.quit()

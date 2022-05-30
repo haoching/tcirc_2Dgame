@@ -2,6 +2,7 @@ import pygame
 import ctypes
 import random
 import os
+import socket
 from player_1 import Player_1
 from player_2 import Player_2
 
@@ -9,6 +10,11 @@ FPS = 60
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+
+#socket
+HOST = '127.0.0.1'
+PORT = 7000
+server_addr = (HOST, PORT)
 
 
 # 初始化
@@ -142,6 +148,4 @@ while running:
     draw_blood(screen, 100, 5, 15)
     pygame.display.update()
     
-    #test
-
 pygame.quit()

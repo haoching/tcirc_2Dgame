@@ -138,7 +138,7 @@ while running:
     screen.fill((135, 206, 235))
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
-    draw_score(screen, str(score), 100, screen_width/3, 10)
+    draw_score(screen, str(score), 100, screen_width/3, 40)
     draw_blood(screen, 100, 5, 15)
     pygame.display.update()
     

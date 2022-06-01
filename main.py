@@ -40,6 +40,9 @@ background_img_2 = pygame.image.load(os.path.join("img","background_tcfsh.jpg"))
 background_img_3 = pygame.image.load(os.path.join("img","background_night.jpg")).convert()
 background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fullsize.jpg")).convert()
 
+#角色圖片
+P_1 = pygame.image.load(os.path.join("img","principal.png")).convert()
+
 #載入音樂
 pygame.mixer.music.load(os.path.join("sound","background.ogg"))
 #pygame.mixer.music.load(os.path.join("sound","14620.mp3"))

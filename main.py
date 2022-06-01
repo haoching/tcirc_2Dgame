@@ -1,6 +1,5 @@
 import pygame
 import ctypes
-import random
 import os
 import socket
 from player_1 import Player_1
@@ -111,7 +110,7 @@ def draw_score(surf, text, size, x, y):
     text_rect.top = y
     surf.blit(text_surface, text_rect)
 
-#分數玩家一(有變數再加入)
+#分數玩家二(有變數再加入)
 font_name = pygame.font.match_font('arial')
 def draw_score2(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)

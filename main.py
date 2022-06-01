@@ -10,6 +10,7 @@ FPS = 60
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+BLACK = (0, 0, 0)
 
 #socket
 HOST = '127.0.0.1'
@@ -50,7 +51,7 @@ pygame.mixer.music.play(-1)
 #繪圖
 def draw_text(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
-    text_surface = font.render(text, True, WHITE)
+    text_surface = font.render(text, True, RED)
     text_rect = text_surface.get_rect()
     text_rect.centerx = x
     text_rect.top = y
@@ -58,9 +59,9 @@ def draw_text(surf, text, size, x, y):
 
 #初始
 def draw_start():
-    screen.blit(background_umamusume.jpg, (0,0))
-    draw_text(screen, 'SAO 格鬥遊戲', 70, screen_width/2, screen_high/4)
-    draw_text(screen, '按任意鍵start!', 20, screen_width/2, screen_high*3/4)
+    screen.blit(background_img_3, (0,0))
+    draw_text(screen, 'SAO fighting', 200,  screen_width/2, screen_high/4)
+    draw_text(screen, 'click to start!', 80, screen_width/2, screen_high*3/4)
     pygame.display.update()
     
     waiting = True
@@ -131,8 +132,12 @@ running = True
 
 
 #遊戲迴圈
+show_init = True
 while running:
     clock.tick(FPS)
+    if show_init:
+        draw_start()
+        show_init = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -142,7 +147,7 @@ while running:
     all_sprites.update()
     
     #畫面顯示
-    screen.fill((135, 206, 235))
+    
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
     draw_score(screen, str(score1), 100, screen_width/3, 40)

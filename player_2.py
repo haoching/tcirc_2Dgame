@@ -1,4 +1,5 @@
 import pygame
+import math
 
 screen_width = 1920
 screen_high = 1080

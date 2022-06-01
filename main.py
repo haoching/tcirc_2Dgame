@@ -1,5 +1,6 @@
 import pygame
 import ctypes
+import math
 import os
 import socket
 from player_1 import Player_1

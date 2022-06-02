@@ -29,7 +29,7 @@ class Player_1(pygame.sprite.Sprite):
         self.image = pygame.Surface((player_1_width, player_1_high))
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.x = screen_width/3-player_1_width#對稱
+        self.rect.x = screen_width/3-player_1_width
         self.rect.y = screen_high-player_1_high
         self.health = 100
 
@@ -48,8 +48,13 @@ class Player_1(pygame.sprite.Sprite):
         if key_pressed[pygame.K_e]: 
             if ((abs(player_1.rect.x-player_2.rect.x)**2+abs(player_1.rect.y-player_2.rect.y)**2)**0.5) <= 2:
                 HP2 -=2
+<<<<<<< HEAD
                 score1 += 1   
           
+=======
+                score1 += 1
+
+>>>>>>> a43c7119484cb2fec32e31fff6575da45515e065
         if player_1_jumping:
             self.rect.y-=player_1_speed_y
             player_1_speed_y-=gravity

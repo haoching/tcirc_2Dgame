@@ -46,10 +46,15 @@ class Player_1(pygame.sprite.Sprite):
             player_1_jumping = True
         #問題程式碼(待解決)    
         if key_pressed[pygame.K_e]: 
+            #all_sprites.update()
             if ((abs(player_1.rect.x-player_2.rect.x)**2+abs(player_1.rect.y-player_2.rect.y)**2)**0.5) <= 2:
                 HP2 -= 2
                 score1 +=1
-                
+                if HP2 <= 0:
+                    running = False
+
+
+
         if player_1_jumping:
             self.rect.y-=player_1_speed_y
             player_1_speed_y-=gravity

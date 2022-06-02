@@ -1,6 +1,8 @@
+import imp
 import pygame
 import socket
 import math
+from player_2 import Player_2
 
 screen_width = 1920
 screen_high = 1080
@@ -36,7 +38,9 @@ class Player_1(pygame.sprite.Sprite):
     def update(self):
         global player_1_speed_y
         global player_1_jumping
-
+        global HP2
+        global score1
+        player_2 = Player_2()
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_a]:
             self.rect.x -= player_speed
@@ -46,7 +50,7 @@ class Player_1(pygame.sprite.Sprite):
             player_1_jumping = True
         #問題程式碼(待解決)    
         if key_pressed[pygame.K_e]: 
-            if ((abs(player_1.rect.x-player_2.rect.x)**2+abs(player_1.rect.y-player_2.rect.y)**2)**0.5) <= 2:
+            if ((abs(self.rect.x-player_2.rect.x)**2+abs(self.rect.y-player_2.rect.y)**2)**0.5) <= 2:
                 HP2 -=2
                 score1 += 1
 

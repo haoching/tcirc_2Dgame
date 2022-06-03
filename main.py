@@ -3,9 +3,9 @@ import ctypes
 import math
 import os
 import socket
-import time
-#from player_1 import Player_1
-#from player_2 import Player_2
+import threading
+from player import Player_1, Player_2
+
 
 FPS = 60
 WHITE = (255, 255, 255)
@@ -17,6 +17,7 @@ BLACK = (0, 0, 0)
 HOST = '127.0.0.1'
 PORT = 7000
 server_addr = (HOST, PORT)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 
 # 初始化
@@ -39,9 +40,7 @@ background_img_2 = pygame.image.load(os.path.join("img","background_tcfsh.jpg"))
 background_img_3 = pygame.image.load(os.path.join("img","background_night.jpg")).convert()
 background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fullsize.jpg")).convert()
 
-#角色圖片
-P_1 = pygame.image.load(os.path.join("img","principal.png")).convert()
-P_2 = pygame.image.load(os.path.join("img","giphy.gif")).convert()
+
 
 #載入音樂
 pygame.mixer.music.load(os.path.join("sound","background.ogg"))
@@ -123,117 +122,7 @@ def draw_score2(surf, text, size, x, y):
     text_rect = text_surface.get_rect()
     text_rect.centerx = x
     text_rect.top = y
-    surf.blit(text_surface, text_rect)    
-
-
-
-#玩家1運動
-player_1_high = 300
-player_1_width = 200
-player_1_speed_y=jump_speed
-player_1_jumping=False
-
-class Player_1(pygame.sprite.Sprite):
-    jumping = False
-    player_1_speed_y = 100
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.health = 100
-        self.score1 = 0
-        self.image = pygame.transform.scale(P_1, (player_1_width, player_1_high))
-        self.image.set_colorkey(BLACK)
-        #self.image.fill((255, 255, 255))
-        self.rect = self.image.get_rect()
-        self.rect.x = screen_width/3-player_1_width
-        self.rect.y = screen_high-player_1_high
-        
-
-    def update(self):
-        global player_1_speed_y
-        global player_1_jumping
-        global HP2
-        global score1
-        #player_2 = Player_2()
-        key_pressed = pygame.key.get_pressed()
-        if key_pressed[pygame.K_a]:
-            self.rect.x -= player_speed
-        if key_pressed[pygame.K_d]:
-            self.rect.x += player_speed
-        if key_pressed[pygame.K_w]:
-            player_1_jumping = True    
-        if key_pressed[pygame.K_e]:
-            self.health -= 1
-            self.score1 += 2
-            #if (((abs(player_1.rect.x)-abs(player_2.rect.x))**2)+((abs(player_1.rect.y)-abs(player_2.rect.y))**2)) <= 5:
-                
-            
-            
-            
-
-        if player_1_jumping:
-            self.rect.y-=player_1_speed_y
-            player_1_speed_y-=gravity
-        if self.rect.y>=screen_high-player_1_high:
-            player_1_jumping = False
-            player_1_speed_y = jump_speed
-        #邊界判斷
-        if self.rect.x >= screen_width-player_1_width:
-            self.rect.x = screen_width-player_1_width
-        if self.rect.x <= 0:
-            self.rect.x = 0
-        data = ""
-        data += str(self.rect.x).zfill(4)
-        data += str(self.rect.y).zfill(4)
-        data += "f"
-        #s.sendto(data.encode(), server_addr)
-
-
-
-
-
-#玩家2運動
-player_2_high = 300
-player_2_width = 200
-player_2_speed_y=jump_speed
-player_2_jumping=False
-class Player_2(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(P_2, (player_2_width, player_2_high))
-        self.image.set_colorkey(BLACK)
-        #self.image.fill((0, 0, 0))
-        self.rect = self.image.get_rect()
-        self.rect.x=screen_width/3*2
-        self.rect.y=screen_high-player_2_high
-        self.score2 = 0
-        self.health = 100
-
-    def update(self):
-        global player_2_speed_y
-        global player_2_jumping
-        key_pressed = pygame.key.get_pressed()
-        if key_pressed[pygame.K_j]:
-            self.rect.x -= 2*player_speed
-        if key_pressed[pygame.K_l]:
-            self.rect.x += 2*player_speed
-        if key_pressed[pygame.K_i]:
-            player_2_jumping=True
-        if key_pressed[pygame.K_u]:
-            self.health -= 0.5 
-            self.score2 += 1   
-        if player_2_jumping:
-            self.rect.y-=player_2_speed_y
-            player_2_speed_y-=gravity
-        if self.rect.y>=screen_high-player_2_high:
-            player_2_jumping = False
-            player_2_speed_y = jump_speed
-        #邊界判斷
-        if self.rect.x >= screen_width-player_2_width:
-            self.rect.x = screen_width-player_2_width
-        if self.rect.x <= 0:
-            self.rect.x = 0
-                        
-
+    surf.blit(text_surface, text_rect)
 
 all_sprites = pygame.sprite.Group()
 player_1 = Player_1()
@@ -243,6 +132,33 @@ all_sprites.add(player_2)
 
 running = True
 show_init = True
+
+print("game start")
+
+#連線
+connectting = False
+def connnectserver(self):
+    global connectting
+    while running:
+        indata ,address = s.recvfrom(1024)
+        data = indata.decode()
+        if str(data[0:4]) == "conn":
+            print("connected")
+            connectting = True
+        else:
+            print(str(data[0:4]),str(data[4:8]))
+            player_2.player_2_x=int(data[0:4])
+            player_2.player_2_y=int(data[4:8])
+print("test:154")
+t = threading.Thread(target = connnectserver, args=('Nash',))
+print("threading.Thread")
+t.start() # 開始
+print("test:155")
+while connectting == False:
+    s.sendto("connect".encode(), server_addr)
+print("test:159")
+
+
 while running:
     clock.tick(FPS)
     if show_init:
@@ -254,8 +170,13 @@ while running:
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             running = False
     #
-    player1 = Player_1()
-    player2 = Player_2()
+    p1data = ""
+    p1data += str(player_1.rect.x).zfill(4)
+    p1data += str(player_1.rect.y).zfill(4)
+    p1data += "f"
+    s.sendto(p1data.encode(), server_addr)
+
+    #
     HP1 = player_1.health
     HP2 = player_2.health
     score1 = player_1.score1

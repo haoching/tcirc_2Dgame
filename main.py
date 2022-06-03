@@ -111,9 +111,9 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x += player_speed
         if key_pressed[pygame.K_w]:
             player_1_jumping = True
-        if key_pressed[pygame.K_e]:
-            self.health -= 2
-            self.score1 += 2
+        # if key_pressed[pygame.K_e]:
+        #     self.health -= 2
+        #     self.score1 += 2
         if player_1_jumping:
             self.rect.y-=player_1_speed_y
             player_1_speed_y-=gravity

@@ -1,3 +1,3 @@
-start ./server/server.py
-start ./main.py
-start ./main.py
+start python ./server/server.py
+start python ./main.py
+start python ./main.py

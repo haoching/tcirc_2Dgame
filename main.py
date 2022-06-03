@@ -3,6 +3,7 @@ import ctypes
 import math
 import os
 import socket
+import time
 #from player_1 import Player_1
 #from player_2 import Player_2
 
@@ -82,7 +83,7 @@ gravity = 5
 def draw_blood(surf,HP2, x, y):
     if HP2 < 0:
         HP2 = 0
-        pygame.quit()
+        draw_text(screen, 'SAO WIN', 300,  screen_width/2, screen_high/2.5)
     line_LENGTH = 300
     line_HEIGHT = 20
     fill = (HP2/100)*line_LENGTH
@@ -95,7 +96,7 @@ def draw_blood(surf,HP2, x, y):
 def draw_blood2(surf, HP1, x, y):
     if HP1 < 0:
         HP1 = 0
-        pygame.quit()
+        draw_text(screen, 'PRINCIPAL WIN', 300,  screen_width/2, screen_high/2.5)
     line_LENGTH = 300
     line_HEIGHT = 20
     fill = (HP1/100)*line_LENGTH
@@ -162,7 +163,7 @@ class Player_1(pygame.sprite.Sprite):
             player_1_jumping = True    
         if key_pressed[pygame.K_e]:
             self.health -= 1
-            self.score1 += 1
+            self.score1 += 2
             #if (((abs(player_1.rect.x)-abs(player_2.rect.x))**2)+((abs(player_1.rect.y)-abs(player_2.rect.y))**2)) <= 5:
                 
             

@@ -127,8 +127,8 @@ def draw_score2(surf, text, size, x, y):
 
 
 #玩家1運動
-player_1_high = 200
-player_1_width = 100
+player_1_high = 250
+player_1_width = 125
 player_1_speed_y=jump_speed
 player_1_jumping=False
 
@@ -139,8 +139,9 @@ class Player_1(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.health = 100
         self.score1 = 0
-        self.image = pygame.Surface((player_1_width, player_1_high))
-        self.image.fill((255, 255, 255))
+        self.image = pygame.transform.scale(P_1, (player_1_width, player_1_high))
+        self.image.set_colorkey(WHITE)
+        #self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
         self.rect.x = screen_width/3-player_1_width
         self.rect.y = screen_high-player_1_high
@@ -161,9 +162,9 @@ class Player_1(pygame.sprite.Sprite):
             player_1_jumping = True
         #問題程式碼(待解決)    
         if key_pressed[pygame.K_e]:
-            if (((abs(player_1.rect.x)-abs(player_2.rect.x))**2)+((abs(player_1.rect.y)-abs(player_2.rect.y))**2)) <= 5:
-                self.health -= 0.5
-                self.score1 += 1
+            self.health -= 0.5
+            self.score1 += 1
+            #if (((abs(player_1.rect.x)-abs(player_2.rect.x))**2)+((abs(player_1.rect.y)-abs(player_2.rect.y))**2)) <= 5:
                 
             
             
@@ -192,14 +193,15 @@ class Player_1(pygame.sprite.Sprite):
 
 #玩家2運動
 player_2_high = 200
-player_2_width = 100
+player_2_width = 200
 player_2_speed_y=jump_speed
 player_2_jumping=False
 class Player_2(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((player_2_width, player_2_high))
-        self.image.fill((0, 0, 0))
+        self.image = pygame.transform.scale(P_2, (player_2_width, player_2_high))
+        self.image.set_colorkey(BLACK)
+        #self.image.fill((0, 0, 0))
         self.rect = self.image.get_rect()
         self.rect.x=screen_width/3*2
         self.rect.y=screen_high-player_2_high

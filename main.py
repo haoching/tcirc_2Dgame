@@ -161,8 +161,11 @@ class Player_1(pygame.sprite.Sprite):
             player_1_jumping = True
         #問題程式碼(待解決)    
         if key_pressed[pygame.K_e]:
-            self.health -= 0.5
-            self.score1 += 1
+            if (((abs(player_1.rect.x)-abs(player_2.rect.x))**2)+((abs(player_1.rect.y)-abs(player_2.rect.y))**2)) <= 5:
+                self.health -= 0.5
+                self.score1 += 1
+                
+            
             
             
 
@@ -250,6 +253,7 @@ while running:
             running = False
     #
     player1 = Player_1()
+    player2 = Player_2()
     HP1 = player_1.health
     HP2 = player_2.health
     score1 = player_1.score1

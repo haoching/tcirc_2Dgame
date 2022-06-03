@@ -42,7 +42,7 @@ background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fu
 
 
 #載入音樂
-pygame.mixer.music.load(os.path.join("sound","background.ogg"))
+pygame.mixer.music.load(os.path.join("sound","1234.mp3"))
 #sound = pygame.mixer.music.load(os.path.join("sound","14620.mp3"))
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
@@ -111,7 +111,9 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x += player_speed
         if key_pressed[pygame.K_w]:
             player_1_jumping = True
-        
+        if key_pressed[pygame.K_e]:
+            self.health -= 2
+            self.score1 += 2
         if player_1_jumping:
             self.rect.y-=player_1_speed_y
             player_1_speed_y-=gravity

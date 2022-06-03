@@ -13,7 +13,7 @@ BLACK = (0, 0, 0)
 
 #socket
 HOST = '127.0.0.1'
-PORT = 7000
+PORT = 48763
 server_addr = (HOST, PORT)
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.sendto("connect".encode(), server_addr)

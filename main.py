@@ -216,14 +216,10 @@ def connnectserver(self):
             print(str(data[0:4]),str(data[4:8]))
             player_2.player_2_x=int(data[0:4])
             player_2.player_2_y=int(data[4:8])
-print("test:154")
 t = threading.Thread(target = connnectserver, args=('Nash',))
-print("threading.Thread")
 t.start() # 開始
-print("test:155")
 while connectting == False:
     s.sendto("connect".encode(), server_addr)
-print("test:159")
 
 
 while running:

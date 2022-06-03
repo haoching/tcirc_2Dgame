@@ -141,7 +141,7 @@ class Player_1(pygame.sprite.Sprite):
         self.health = 100
         self.score1 = 0
         self.image = pygame.transform.scale(P_1, (player_1_width, player_1_high))
-        self.image.set_colorkey(WHITE)
+        self.image.set_colorkey(BLACK)
         #self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
         self.rect.x = screen_width/3-player_1_width

@@ -137,7 +137,7 @@ class Player_1(pygame.sprite.Sprite):
     player_1_speed_y = 100
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.health = 120
+        self.health = 100
         self.score1 = 0
         self.image = pygame.transform.scale(P_1, (player_1_width, player_1_high))
         self.image.set_colorkey(WHITE)

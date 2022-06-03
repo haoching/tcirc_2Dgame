@@ -137,7 +137,7 @@ class Player_1(pygame.sprite.Sprite):
     player_1_speed_y = 100
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.health = 100
+        self.health = 120
         self.score1 = 0
         self.image = pygame.transform.scale(P_1, (player_1_width, player_1_high))
         self.image.set_colorkey(WHITE)
@@ -159,10 +159,9 @@ class Player_1(pygame.sprite.Sprite):
         if key_pressed[pygame.K_d]:
             self.rect.x += player_speed
         if key_pressed[pygame.K_w]:
-            player_1_jumping = True
-        #問題程式碼(待解決)    
+            player_1_jumping = True    
         if key_pressed[pygame.K_e]:
-            self.health -= 0.5
+            self.health -= 1
             self.score1 += 1
             #if (((abs(player_1.rect.x)-abs(player_2.rect.x))**2)+((abs(player_1.rect.y)-abs(player_2.rect.y))**2)) <= 5:
                 
@@ -213,9 +212,9 @@ class Player_2(pygame.sprite.Sprite):
         global player_2_jumping
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_j]:
-            self.rect.x -= player_speed
+            self.rect.x -= 2*player_speed
         if key_pressed[pygame.K_l]:
-            self.rect.x += player_speed
+            self.rect.x += 2*player_speed
         if key_pressed[pygame.K_i]:
             player_2_jumping=True
         if key_pressed[pygame.K_u]:

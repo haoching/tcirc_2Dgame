@@ -125,6 +125,11 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x = screen_width-player_1_width
         if self.rect.x <= 0:
             self.rect.x = 0
+        p1data = "l"
+        p1data += str(player_1.rect.x).zfill(4)
+        p1data += str(player_1.rect.y).zfill(4)
+        p1data += "f"
+        s.sendto(p1data.encode(), server_addr)
 #player2
 player_2_high = 200
 player_2_width = 100
@@ -213,10 +218,10 @@ def connnectserver(self):
         if str(data[0:4]) == "conn":
             print("connected")
             connectting = True
-        else:
-            print(str(data[0:4]),str(data[4:8]))
-            player_2.player_2_x=int(data[0:4])
-            player_2.player_2_y=int(data[4:8])
+        elif str(data[0:1]) == "l":
+            print(str(data[1:5]),str(data[5:9]))
+            player_2.player_2_x = 1920-int(data[1:5])
+            player_2.player_2_y = int(data[5:9])
 t = threading.Thread(target = connnectserver, args=('Nash',))
 t.start() # 開始
 while connectting == False:
@@ -233,12 +238,6 @@ while running:
             running = False
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             running = False
-    #
-    p1data = ""
-    p1data += str(player_1.rect.x).zfill(4)
-    p1data += str(player_1.rect.y).zfill(4)
-    p1data += "f"
-    s.sendto(p1data.encode(), server_addr)
     #
     HP1 = player_1.health
     HP2 = player_2.health

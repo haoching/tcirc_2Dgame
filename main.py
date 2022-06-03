@@ -127,8 +127,8 @@ def draw_score2(surf, text, size, x, y):
 
 
 #玩家1運動
-player_1_high = 250
-player_1_width = 150
+player_1_high = 300
+player_1_width = 200
 player_1_speed_y=jump_speed
 player_1_jumping=False
 
@@ -192,7 +192,7 @@ class Player_1(pygame.sprite.Sprite):
 
 
 #玩家2運動
-player_2_high = 250
+player_2_high = 300
 player_2_width = 200
 player_2_speed_y=jump_speed
 player_2_jumping=False

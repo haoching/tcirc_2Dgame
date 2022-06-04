@@ -43,7 +43,7 @@ background_img_4 = pygame.image.load(os.path.join("img","background_umamusume_fu
 
 #載入音樂
 pygame.mixer.music.load(os.path.join("sound","1234.mp3"))
-Sound = pygame.mixer.sound(os.path.join("sound","12345.mp3"))
+Sound = pygame.mixer.Sound(os.path.join("sound","12345.mp3"))
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
 

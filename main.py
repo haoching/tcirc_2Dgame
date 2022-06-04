@@ -73,7 +73,7 @@ def draw_start():
                 return False
 
 #物理
-jump_speed = 100
+jump_speed = 85
 player_speed = 20
 gravity = 5
 
@@ -82,14 +82,16 @@ gravity = 5
 player_1_img = pygame.image.load(os.path.join("img","principal.png")).convert()
 player_2_img = pygame.image.load(os.path.join("img","giphy.gif")).convert()
 
-#玩家1運動
+#玩家1
 player_1_high = 300
 player_1_width = 200
 
 class Player_1(pygame.sprite.Sprite):
+    attackcd = 0
     jumping = False
     y_speed = jump_speed
     rotation = "r"
+    attack = False
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.health = 100
@@ -100,6 +102,8 @@ class Player_1(pygame.sprite.Sprite):
         self.rect.x = screen_width / 3 - player_1_width
         self.rect.y = screen_high - player_1_high
     def update(self):
+        self.attackcd += 1
+        self.attackcd %= 30
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_a]:
             self.rect.x -= player_speed
@@ -113,9 +117,8 @@ class Player_1(pygame.sprite.Sprite):
             self.rotation = "r"
         if key_pressed[pygame.K_SPACE]:
             self.jumping = True
-        # if key_pressed[pygame.K_e]:
-        #     self.health -= 2
-        #     self.score1 += 2
+        if key_pressed[pygame.K_e] and self.attackcd <= 5:
+            self.attack = True
         if self.jumping:
             self.rect.y -= self.y_speed
             self.y_speed -= gravity
@@ -127,7 +130,11 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x = screen_width-player_1_width
         if self.rect.x <= 0:
             self.rect.x = 0
-        data = "l"
+        if self.attack:
+            data = "a"
+            self.attack = False
+        else:
+            data = "l"
         data += str(player_1.rect.x).zfill(4)
         data += str(player_1.rect.y).zfill(4)
         data += self.rotation

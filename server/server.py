@@ -67,10 +67,10 @@ while True:
         if address == player_1.address:
             player_1.x=int(data[1:5])
             player_1.y=int(data[5:9])
-            data+=str(player_1.hp).zfill(3)
             data+=str(player_2.hp).zfill(3)
-            data+=str(player_1.score).zfill(2)
+            data+=str(player_1.hp).zfill(3)
             data+=str(player_2.score).zfill(2)
+            data+=str(player_1.score).zfill(2)
             s.sendto(data.encode(), player_2.address)
         elif address == player_2.address:
             player_2.x=int(data[1:5])
@@ -88,21 +88,31 @@ while True:
                 player_2.hp -= 10
             player_1.x=int(data[1:5])
             player_1.y=int(data[5:9])
-            data+=str(player_1.hp).zfill(3)
             data+=str(player_2.hp).zfill(3)
-            data+=str(player_1.score).zfill(2)
+            data+=str(player_1.hp).zfill(3)
             data+=str(player_2.score).zfill(2)
+            data+=str(player_1.score).zfill(2)
             s.sendto(data.encode(), player_2.address)
         elif address == player_2.address:
             if abs(player_1.x-(1920-player_2.x-200))**2 + abs(player_1.y-player_2.y)**2 <= 10000:
                 player_1.hp -= 10
             player_2.x=int(data[1:5])
             player_2.y=int(data[5:9])
-            data+=str(player_2.hp).zfill(3)
             data+=str(player_1.hp).zfill(3)
-            data+=str(player_2.score).zfill(2)
+            data+=str(player_2.hp).zfill(3)
             data+=str(player_1.score).zfill(2)
+            data+=str(player_2.score).zfill(2)
             s.sendto(data.encode(), player_1.address)
         else:
             print("error")
+    if player_1.hp <= 0:
+        data = "w"
+        s.sendto(data.encode(), player_2.address)
+        data = "d"
+        s.sendto(data.encode(), player_1.address)
+    if player_2.hp <= 0:
+        data = "w"
+        s.sendto(data.encode(), player_1.address)
+        data = "d"
+        s.sendto(data.encode(), player_2.address)
     working = True

@@ -174,9 +174,6 @@ class Player_2(pygame.sprite.Sprite):
 
 #血條玩家一(做完生命值和碰撞後再放入變數)
 def draw_blood(surf,hp, x, y):
-    if hp < 0:
-        hp = 0
-        draw_text(screen, 'SAO WIN', 300,  screen_width/2, screen_high/2.5)
     line_length = 300
     line_height = 20
     fill = (hp/100)*line_length
@@ -187,9 +184,6 @@ def draw_blood(surf,hp, x, y):
 
 #血條玩家二(做完生命值和碰撞後再放入變數)
 def draw_blood2(surf, hp, x, y):
-    if hp < 0:
-        hp = 0
-        draw_text(screen, 'PRINCIPAL WIN', 300,  screen_width/2, screen_high/2.5)
     line_length = 300
     line_height = 20
     fill = (hp/100)*line_length
@@ -246,6 +240,10 @@ def connnectserver(self):
             player_2.health = int(data[13:16])
             player_1.score = int(data[16:18])
             player_2.score = int(data[18:20])
+        elif str(data[0:1]) == "w":
+            draw_text(screen, 'YOU WIN', 300,  screen_width/2, screen_high/2.5)
+        elif str(data[0:1]) == "d":
+            draw_text(screen, 'YOU LOSE', 300,  screen_width/2, screen_high/2.5)
             
 t = threading.Thread(target = connnectserver, args=('Nash',))
 t.start() # 開始

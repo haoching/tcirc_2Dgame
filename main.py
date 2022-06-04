@@ -172,7 +172,7 @@ class Player_2(pygame.sprite.Sprite):
             self.image.set_colorkey(BLACK)
         
 
-#血條玩家一
+#玩家血條
 def draw_blood(surf,hp, x, y):
     line_length = 300
     line_height = 20

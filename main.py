@@ -61,7 +61,7 @@ def draw_text(surf, text, size, x, y):
 #初始
 def draw_start():
     screen.blit(background_img_3, (0,0))
-    draw_text(screen, 'tcirc online', 200,  screen_width/2, screen_high/4)
+    draw_text(screen, 'TCIRC Online Fighting', 200,  screen_width/2, screen_high/4)
     draw_text(screen, 'click to start!', 80, screen_width/2, screen_high*3/4)
     pygame.display.update()
     

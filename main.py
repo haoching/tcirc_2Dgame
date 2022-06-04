@@ -92,8 +92,8 @@ class Player_1(pygame.sprite.Sprite):
     rotation = "r"
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.health = -1
-        self.score = -1
+        self.health = 100
+        self.score = 0
         self.image = pygame.transform.scale(player_1_img, (player_1_width, player_1_high))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
@@ -147,8 +147,8 @@ class Player_2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x=screen_width/3*2
         self.rect.y=screen_high-player_2_high
-        self.score = -1
-        self.health = -1
+        self.score = 0
+        self.health = 100
     def update(self):
         self.rect.x = self.x
         self.rect.y = self.y

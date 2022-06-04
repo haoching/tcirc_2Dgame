@@ -1,3 +1,4 @@
+from re import T
 import pygame
 import ctypes
 import math
@@ -204,9 +205,12 @@ show_init = True
 
 print("game start")
 
+win = False
+lose = False
 #連線
 connectting = False
 def connnectserver(self):
+    global win, lose
     global connectting
     while running:
         indata ,address = s.recvfrom(1024)
@@ -222,9 +226,9 @@ def connnectserver(self):
             player_1.health = int(data[10:13])
             player_2.health = int(data[13:16])
         elif str(data[0:1]) == "w":
-            draw_text(screen, 'YOU WIN', 300,  screen_width/2, screen_high/2.5)
+            win = True
         elif str(data[0:1]) == "d":
-            draw_text(screen, 'YOU LOSE', 300,  screen_width/2, screen_high/2.5)
+            lose = True
             
 t = threading.Thread(target = connnectserver, args=('Nash',))
 t.start() # 開始
@@ -243,13 +247,15 @@ while running:
             running = False
     #
     all_sprites.update()
-    
     #畫面顯示
-    
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
     draw_blood(screen, player_1.health, 5, 15)
     draw_blood2(screen, player_2.health, 1610, 15)
+    if win:
+        draw_text(screen, 'YOU WIN', 300,  screen_width/2, screen_high/2.5)
+    elif lose:
+        draw_text(screen, 'YOU LOSE', 300,  screen_width/2, screen_high/2.5)
     pygame.display.update()
     
 pygame.quit()

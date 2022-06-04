@@ -11,9 +11,6 @@ s.bind((HOST, PORT))
 print('server start at: %s:%s' % (HOST, PORT))
 print('wait for connection...')
 
-player_1_address = 0
-player_2_address = 0
-
 '''
 player_1_x = 1920 / 3
 player_1_y = 1080 - 200
@@ -79,16 +76,16 @@ while True:
             print("error")
     if str(data[0:1]) == "a":
         if address == player_1.address:
-            if abs(player_1.x-(1920-player_2.x-100))**2 + abs(player_1.y-player_2.y)**2 <= 10000:
-                player_2.hp -= 10
+            if abs(player_1.x-(1920-player_2.x-200))**2 + abs(player_1.y-player_2.y)**2 <= 40000:
+                player_2.hp -= 5
             player_1.x=int(data[1:5])
             player_1.y=int(data[5:9])
             data+=str(player_2.hp).zfill(3)
             data+=str(player_1.hp).zfill(3)
             s.sendto(data.encode(), player_2.address)
         elif address == player_2.address:
-            if abs(player_1.x-(1920-player_2.x-200))**2 + abs(player_1.y-player_2.y)**2 <= 10000:
-                player_1.hp -= 10
+            if abs(player_1.x-(1920-player_2.x-200))**2 + abs(player_1.y-player_2.y)**2 <= 40000:
+                player_1.hp -= 5
             player_2.x=int(data[1:5])
             player_2.y=int(data[5:9])
             data+=str(player_1.hp).zfill(3)

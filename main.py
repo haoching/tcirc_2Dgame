@@ -221,8 +221,6 @@ def connnectserver(self):
             player_2.r = str(data[9:10])
             player_1.health = int(data[10:13])
             player_2.health = int(data[13:16])
-            player_1.score = int(data[16:18])
-            player_2.score = int(data[18:20])
         elif str(data[0:1]) == "w":
             draw_text(screen, 'YOU WIN', 300,  screen_width/2, screen_high/2.5)
         elif str(data[0:1]) == "d":

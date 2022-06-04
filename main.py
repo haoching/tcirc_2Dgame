@@ -109,7 +109,7 @@ class Player_1(pygame.sprite.Sprite):
             self.rect.x -= player_speed
         if key_pressed[pygame.K_d]:
             self.rect.x += player_speed
-        if key_pressed[pygame.K_w]:
+        if key_pressed[pygame.K_SPACE]:
             player_1_jumping = True
         # if key_pressed[pygame.K_e]:
         #     self.health -= 2
@@ -220,7 +220,7 @@ def connnectserver(self):
             connectting = True
         elif str(data[0:1]) == "l":
             print(str(data[1:5]),str(data[5:9]))
-            player_2.player_2_x = 1920-int(data[1:5])
+            player_2.player_2_x = 1920-int(data[1:5])-player_1_width
             player_2.player_2_y = int(data[5:9])
 t = threading.Thread(target = connnectserver, args=('Nash',))
 t.start() # 開始
@@ -239,20 +239,16 @@ while running:
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             running = False
     #
-    HP1 = player_1.health
-    HP2 = player_2.health
-    score1 = player_1.score1
-    score2 = player_2.score2
     all_sprites.update()
     
     #畫面顯示
     
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
-    draw_score(screen, str(score1), 100, screen_width/3, 40)
-    draw_score2(screen, str(score2), 100, screen_width/1.5, 40)
-    draw_blood(screen, HP2, 5, 15)
-    draw_blood2(screen, HP1, 1610, 15)
+    draw_score(screen, str(player_1.score1), 100, screen_width/3, 40)
+    draw_score2(screen, str(player_2.score2), 100, screen_width/1.5, 40)
+    draw_blood(screen, player_1.health, 5, 15)
+    draw_blood2(screen, player_2.health, 1610, 15)
     pygame.display.update()
     
 pygame.quit()

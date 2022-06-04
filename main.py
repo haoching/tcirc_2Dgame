@@ -172,7 +172,7 @@ class Player_2(pygame.sprite.Sprite):
             self.image.set_colorkey(BLACK)
         
 
-#血條玩家一(做完生命值和碰撞後再放入變數)
+#血條玩家一
 def draw_blood(surf,hp, x, y):
     line_length = 300
     line_height = 20
@@ -181,18 +181,6 @@ def draw_blood(surf,hp, x, y):
     fill_rect = pygame.Rect(x, y, fill, line_height)
     pygame.draw.rect(surf, RED, fill_rect)
     pygame.draw.rect(surf, WHITE, outline_rect, 2)
-
-#血條玩家二(做完生命值和碰撞後再放入變數)
-def draw_blood2(surf, hp, x, y):
-    line_length = 300
-    line_height = 20
-    fill = (hp/100)*line_length
-    outline_rect = pygame.Rect(x, y, line_length, line_height)
-    fill_rect = pygame.Rect(x, y, fill, line_height)
-    pygame.draw.rect(surf, RED, fill_rect)
-    pygame.draw.rect(surf, WHITE, outline_rect, 2)
-
-
 
 all_sprites = pygame.sprite.Group()
 player_1 = Player_1()
@@ -251,7 +239,7 @@ while running:
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
     draw_blood(screen, player_1.health, 5, 15)
-    draw_blood2(screen, player_2.health, 1610, 15)
+    draw_blood(screen, player_2.health, 1610, 15)
     if win:
         draw_text(screen, 'YOU WIN', 300,  screen_width/2, screen_high/2.5)
     elif lose:

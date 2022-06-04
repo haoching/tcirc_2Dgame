@@ -142,7 +142,7 @@ class Player_2(pygame.sprite.Sprite):
     r = "r"
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(player_2_img, (player_2_width, player_2_high), True, False)
+        self.image = pygame.transform.scale(player_2_img, (player_2_width, player_2_high))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.rect.x=screen_width/3*2
@@ -156,8 +156,8 @@ class Player_2(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(player_2_img, (player_2_width, player_2_high))
             self.image.set_colorkey(BLACK)
         elif self.r == "r":
-            self.image = pygame.transform.flip(pygame.transform.scale(player_2_img, (player_2_width, player_2_high)))
-
+            self.image = pygame.transform.flip(pygame.transform.scale(player_2_img, (player_2_width, player_2_high)), True, False)
+            self.image.set_colorkey(BLACK)
         
 
 #血條玩家一(做完生命值和碰撞後再放入變數)

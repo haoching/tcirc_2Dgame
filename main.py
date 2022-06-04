@@ -73,7 +73,7 @@ def draw_start():
                 return False
 
 #物理
-jump_speed = 85
+jump_speed = 100
 player_speed = 20
 gravity = 5
 
@@ -85,12 +85,11 @@ player_2_img = pygame.image.load(os.path.join("img","giphy.gif")).convert()
 #玩家1運動
 player_1_high = 300
 player_1_width = 200
-player_1_speed_y=jump_speed
-player_1_jumping=False
 
 class Player_1(pygame.sprite.Sprite):
     jumping = False
-    player_1_speed_y = 100
+    y_speed = jump_speed
+    rotation = "r"
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.health = 100
@@ -98,52 +97,52 @@ class Player_1(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(player_1_img, (player_1_width, player_1_high))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.rect.x = screen_width/3-player_1_width
-        self.rect.y = screen_high-player_1_high
+        self.rect.x = screen_width / 3 - player_1_width
+        self.rect.y = screen_high - player_1_high
     def update(self):
-        global player_1_speed_y
-        global player_1_jumping
-
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_a]:
             self.rect.x -= player_speed
-            self.image = pygame.transform.flip(pygame.transform.scale(player_1_img, (player_1_width, player_1_high)) , True, False)
+            self.image = pygame.transform.flip(pygame.transform.scale(player_1_img, (player_1_width, player_1_high)), True, False)
             self.image.set_colorkey(BLACK)
+            self.rotation = "l"
         if key_pressed[pygame.K_d]:
             self.rect.x += player_speed
             self.image = pygame.transform.flip(pygame.transform.scale(player_1_img, (player_1_width, player_1_high)), False, False)
             self.image.set_colorkey(BLACK)
+            self.rotation = "r"
         if key_pressed[pygame.K_SPACE]:
-            player_1_jumping = True
+            self.jumping = True
         # if key_pressed[pygame.K_e]:
         #     self.health -= 2
         #     self.score1 += 2
-        if player_1_jumping:
-            self.rect.y-=player_1_speed_y
-            player_1_speed_y-=gravity
-        if self.rect.y>=screen_high-player_1_high:
-            player_1_jumping = False
-            player_1_speed_y = jump_speed
+        if self.jumping:
+            self.rect.y -= self.y_speed
+            self.y_speed -= gravity
+        if self.rect.y >= screen_high-player_1_high:
+            self.jumping = False
+            self.y_speed = jump_speed
         #邊界判斷
         if self.rect.x >= screen_width-player_1_width:
             self.rect.x = screen_width-player_1_width
         if self.rect.x <= 0:
             self.rect.x = 0
-        p1data = "l"
-        p1data += str(player_1.rect.x).zfill(4)
-        p1data += str(player_1.rect.y).zfill(4)
-        p1data += "f"
-        s.sendto(p1data.encode(), server_addr)
+        data = "l"
+        data += str(player_1.rect.x).zfill(4)
+        data += str(player_1.rect.y).zfill(4)
+        data += self.rotation
+        s.sendto(data.encode(), server_addr)
 #player2
 player_2_high = 200
 player_2_width = 100
 
 class Player_2(pygame.sprite.Sprite):
-    player_2_x = screen_width/3*2
-    player_2_y=screen_high-player_2_high
+    x = screen_width/3*2
+    y=screen_high-player_2_high
+    r = "r"
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(player_2_img, (player_2_width, player_2_high))
+        self.image = pygame.transform.scale(player_2_img, (player_2_width, player_2_high), True, False)
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.rect.x=screen_width/3*2
@@ -151,33 +150,39 @@ class Player_2(pygame.sprite.Sprite):
         self.score2 = 0
         self.health = 100
     def update(self):
-        self.rect.x = self.player_2_x
-        self.rect.y = self.player_2_y
+        self.rect.x = self.x
+        self.rect.y = self.y
+        if self.r == "l":
+            self.image = pygame.transform.scale(player_2_img, (player_2_width, player_2_high))
+            self.image.set_colorkey(BLACK)
+        elif self.r == "r":
+            self.image = pygame.transform.flip(pygame.transform.scale(player_2_img, (player_2_width, player_2_high)))
 
+        
 
 #血條玩家一(做完生命值和碰撞後再放入變數)
-def draw_blood(surf,HP2, x, y):
-    if HP2 < 0:
-        HP2 = 0
+def draw_blood(surf,hp, x, y):
+    if hp < 0:
+        hp = 0
         draw_text(screen, 'SAO WIN', 300,  screen_width/2, screen_high/2.5)
-    line_LENGTH = 300
-    line_HEIGHT = 20
-    fill = (HP2/100)*line_LENGTH
-    outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
-    fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
+    line_length = 300
+    line_height = 20
+    fill = (hp/100)*line_length
+    outline_rect = pygame.Rect(x, y, line_length, line_height)
+    fill_rect = pygame.Rect(x, y, fill, line_height)
     pygame.draw.rect(surf, RED, fill_rect)
     pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
 #血條玩家二(做完生命值和碰撞後再放入變數)
-def draw_blood2(surf, HP1, x, y):
-    if HP1 < 0:
-        HP1 = 0
+def draw_blood2(surf, hp, x, y):
+    if hp < 0:
+        hp = 0
         draw_text(screen, 'PRINCIPAL WIN', 300,  screen_width/2, screen_high/2.5)
-    line_LENGTH = 300
-    line_HEIGHT = 20
-    fill = (HP1/100)*line_LENGTH
-    outline_rect = pygame.Rect(x, y, line_LENGTH, line_HEIGHT)
-    fill_rect = pygame.Rect(x, y, fill, line_HEIGHT)
+    line_length = 300
+    line_height = 20
+    fill = (hp/100)*line_length
+    outline_rect = pygame.Rect(x, y, line_length, line_height)
+    fill_rect = pygame.Rect(x, y, fill, line_height)
     pygame.draw.rect(surf, RED, fill_rect)
     pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
@@ -224,8 +229,10 @@ def connnectserver(self):
             connectting = True
         elif str(data[0:1]) == "l":
             print(str(data[1:5]),str(data[5:9]))
-            player_2.player_2_x = 1920-int(data[1:5])-player_1_width
-            player_2.player_2_y = int(data[5:9])
+            player_2.x = 1920-int(data[1:5])-player_1_width
+            player_2.y = int(data[5:9])
+            player_2.r = str(data[9:10])
+            
 t = threading.Thread(target = connnectserver, args=('Nash',))
 t.start() # 開始
 while connectting == False:

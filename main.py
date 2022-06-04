@@ -49,6 +49,7 @@ pygame.mixer.music.play(-1)
 
 
 #繪圖
+font_name = pygame.font.match_font('arial')
 def draw_text(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, RED)
@@ -60,7 +61,7 @@ def draw_text(surf, text, size, x, y):
 #初始
 def draw_start():
     screen.blit(background_img_3, (0,0))
-    draw_text(screen, 'SAO fighting', 200,  screen_width/2, screen_high/4)
+    draw_text(screen, 'tcirc online', 200,  screen_width/2, screen_high/4)
     draw_text(screen, 'click to start!', 80, screen_width/2, screen_high*3/4)
     pygame.display.update()
     
@@ -71,6 +72,10 @@ def draw_start():
             if event.type == pygame.KEYUP:
                 waiting = False
                 return False
+
+screen.blit(background_img_3, (0,0))
+draw_text(screen, 'tcirc online', 200,  screen_width/2, screen_high/4)
+pygame.display.update()
 
 #物理
 jump_speed = 85
@@ -194,7 +199,6 @@ def draw_blood2(surf, hp, x, y):
     pygame.draw.rect(surf, WHITE, outline_rect, 2)
 
 #分數玩家一(有變數再加入)
-font_name = pygame.font.match_font('arial')
 def draw_score(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, GREEN)
@@ -204,7 +208,6 @@ def draw_score(surf, text, size, x, y):
     surf.blit(text_surface, text_rect)
 
 #分數玩家二(有變數再加入)
-font_name = pygame.font.match_font('arial')
 def draw_score2(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, GREEN)

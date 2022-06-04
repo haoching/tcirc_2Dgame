@@ -31,7 +31,6 @@ class player():
     y = 1080 - 200
     r = "r"
     hp = 100
-    score = 0
 
 player_1 = player()
 player_2 = player()

@@ -30,8 +30,8 @@ class player():
     x = 1920/3
     y = 1080 - 200
     r = "r"
-    hp = 60
-    score = 1
+    hp = 100
+    score = 0
 
 player_1 = player()
 player_2 = player()
@@ -79,6 +79,29 @@ while True:
             data+=str(player_2.hp).zfill(3)
             data+=str(player_1.score).zfill(2)
             data+=str(player_2.score).zfill(2)
+            s.sendto(data.encode(), player_1.address)
+        else:
+            print("error")
+    if str(data[0:1]) == "a":
+        if address == player_1.address:
+            if abs(player_1.x-(1920-player_2.x-200))**2 + abs(player_1.y-player_2.y)**2 <= 2500:
+                player_2.hp -= 10
+            player_1.x=int(data[1:5])
+            player_1.y=int(data[5:9])
+            data+=str(player_1.hp).zfill(3)
+            data+=str(player_2.hp).zfill(3)
+            data+=str(player_1.score).zfill(2)
+            data+=str(player_2.score).zfill(2)
+            s.sendto(data.encode(), player_2.address)
+        elif address == player_2.address:
+            if abs(player_1.x-(1920-player_2.x-200))**2 + abs(player_1.y-player_2.y)**2 <= 2500:
+                player_1.hp -= 10
+            player_2.x=int(data[1:5])
+            player_2.y=int(data[5:9])
+            data+=str(player_2.hp).zfill(3)
+            data+=str(player_1.hp).zfill(3)
+            data+=str(player_2.score).zfill(2)
+            data+=str(player_1.score).zfill(2)
             s.sendto(data.encode(), player_1.address)
         else:
             print("error")

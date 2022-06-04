@@ -85,8 +85,6 @@ while True:
             player_1.y=int(data[5:9])
             data+=str(player_2.hp).zfill(3)
             data+=str(player_1.hp).zfill(3)
-            data+=str(player_2.score).zfill(2)
-            data+=str(player_1.score).zfill(2)
             s.sendto(data.encode(), player_2.address)
         elif address == player_2.address:
             if abs(player_1.x-(1920-player_2.x-200))**2 + abs(player_1.y-player_2.y)**2 <= 10000:
@@ -95,8 +93,6 @@ while True:
             player_2.y=int(data[5:9])
             data+=str(player_1.hp).zfill(3)
             data+=str(player_2.hp).zfill(3)
-            data+=str(player_1.score).zfill(2)
-            data+=str(player_2.score).zfill(2)
             s.sendto(data.encode(), player_1.address)
         else:
             print("error")

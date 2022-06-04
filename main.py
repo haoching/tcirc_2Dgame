@@ -107,8 +107,12 @@ class Player_1(pygame.sprite.Sprite):
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_a]:
             self.rect.x -= player_speed
+            self.image = pygame.transform.flip(pygame.transform.scale(player_1_img, (player_1_width, player_1_high)) , True, False)
+            self.image.set_colorkey(BLACK)
         if key_pressed[pygame.K_d]:
             self.rect.x += player_speed
+            self.image = pygame.transform.flip(pygame.transform.scale(player_1_img, (player_1_width, player_1_high)), False, False)
+            self.image.set_colorkey(BLACK)
         if key_pressed[pygame.K_SPACE]:
             player_1_jumping = True
         # if key_pressed[pygame.K_e]:

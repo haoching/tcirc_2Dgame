@@ -68,16 +68,12 @@ while True:
             player_1.y=int(data[5:9])
             data+=str(player_2.hp).zfill(3)
             data+=str(player_1.hp).zfill(3)
-            data+=str(player_2.score).zfill(2)
-            data+=str(player_1.score).zfill(2)
             s.sendto(data.encode(), player_2.address)
         elif address == player_2.address:
             player_2.x=int(data[1:5])
             player_2.y=int(data[5:9])
             data+=str(player_1.hp).zfill(3)
             data+=str(player_2.hp).zfill(3)
-            data+=str(player_1.score).zfill(2)
-            data+=str(player_2.score).zfill(2)
             s.sendto(data.encode(), player_1.address)
         else:
             print("error")

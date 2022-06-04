@@ -92,8 +92,8 @@ class Player_1(pygame.sprite.Sprite):
     rotation = "r"
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.health = 100
-        self.score1 = 0
+        self.health = -1
+        self.score = -1
         self.image = pygame.transform.scale(player_1_img, (player_1_width, player_1_high))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
@@ -147,15 +147,15 @@ class Player_2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x=screen_width/3*2
         self.rect.y=screen_high-player_2_high
-        self.score2 = 0
-        self.health = 100
+        self.score = -1
+        self.health = -1
     def update(self):
         self.rect.x = self.x
         self.rect.y = self.y
-        if self.r == "l":
+        if self.r == "r":
             self.image = pygame.transform.scale(player_2_img, (player_2_width, player_2_high))
             self.image.set_colorkey(BLACK)
-        elif self.r == "r":
+        elif self.r == "l":
             self.image = pygame.transform.flip(pygame.transform.scale(player_2_img, (player_2_width, player_2_high)), True, False)
             self.image.set_colorkey(BLACK)
         
@@ -232,12 +232,15 @@ def connnectserver(self):
             player_2.x = 1920-int(data[1:5])-player_1_width
             player_2.y = int(data[5:9])
             player_2.r = str(data[9:10])
+            player_1.health = int(data[10:13])
+            player_2.health = int(data[13:16])
+            player_1.score = int(data[16:18])
+            player_2.score = int(data[18:20])
             
 t = threading.Thread(target = connnectserver, args=('Nash',))
 t.start() # 開始
 while connectting == False:
     s.sendto("connect".encode(), server_addr)
-
 
 while running:
     clock.tick(FPS)
@@ -256,8 +259,8 @@ while running:
     
     screen.blit(background_img_1 , (0,0))
     all_sprites.draw(screen)
-    draw_score(screen, str(player_1.score1), 100, screen_width/3, 40)
-    draw_score2(screen, str(player_2.score2), 100, screen_width/1.5, 40)
+    draw_score(screen, str(player_1.score), 100, screen_width/3, 40)
+    draw_score2(screen, str(player_2.score), 100, screen_width/1.5, 40)
     draw_blood(screen, player_1.health, 5, 15)
     draw_blood2(screen, player_2.health, 1610, 15)
     pygame.display.update()

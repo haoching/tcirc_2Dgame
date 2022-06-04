@@ -13,6 +13,7 @@ print('wait for connection...')
 
 player_1_address = 0
 player_2_address = 0
+
 '''
 player_1_x = 1920 / 3
 player_1_y = 1080 - 200
@@ -21,14 +22,16 @@ player_2_y = 1080 - 200
 player_1_r = "r"
 player_2_r = "r"
 player_1_hp = 100
-player_2_hp = 100'''
+player_2_hp = 100
+'''
 
 class player():
     address = 0
     x = 1920/3
     y = 1080 - 200
     r = "r"
-    hp = 100
+    hp = 60
+    score = 1
 
 player_1 = player()
 player_2 = player()
@@ -64,11 +67,19 @@ while True:
         if address == player_1.address:
             player_1.x=int(data[1:5])
             player_1.y=int(data[5:9])
-            s.sendto(indata, player_2.address)
+            data+=str(player_1.hp).zfill(3)
+            data+=str(player_2.hp).zfill(3)
+            data+=str(player_1.score).zfill(2)
+            data+=str(player_2.score).zfill(2)
+            s.sendto(data.encode(), player_2.address)
         elif address == player_2.address:
             player_2.x=int(data[1:5])
             player_2.y=int(data[5:9])
-            s.sendto(indata, player_1.address)
+            data+=str(player_1.hp).zfill(3)
+            data+=str(player_2.hp).zfill(3)
+            data+=str(player_1.score).zfill(2)
+            data+=str(player_2.score).zfill(2)
+            s.sendto(data.encode(), player_1.address)
         else:
             print("error")
     working = True

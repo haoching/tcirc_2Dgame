@@ -150,15 +150,15 @@ player_2_width = 100
 
 class Player_2(pygame.sprite.Sprite):
     x = screen_width/3*2
-    y=screen_high-player_2_high
+    y=screen_high - player_2_high
     r = "r"
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.scale(player_2_img, (player_2_width, player_2_high))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.rect.x=screen_width/3*2
-        self.rect.y=screen_high-player_2_high
+        self.rect.x = screen_width/3*2
+        self.rect.y = screen_high-player_2_high
         self.health = 100
     def update(self):
         self.rect.x = self.x
@@ -211,12 +211,12 @@ def connnectserver(self):
     while running:
         indata ,address = s.recvfrom(1024)
         data = indata.decode()
-        if str(data[0:4]) == "conn":
+        if str(data[0:7]) == "connect":
             print("connected")
             connectting = True
         elif str(data[0:1]) == "l":
             print(str(data[1:5]),str(data[5:9]))
-            player_2.x = 1920-int(data[1:5])-player_1_width
+            player_2.x = 1920-int(data[1:5]) - player_1_width
             player_2.y = int(data[5:9])
             player_2.r = str(data[9:10])
             player_1.health = int(data[10:13])

@@ -79,7 +79,7 @@ while True:
             print("error")
     if str(data[0:1]) == "a":
         if address == player_1.address:
-            if abs(player_1.x-(1920-player_2.x-200))**2 + abs(player_1.y-player_2.y)**2 <= 10000:
+            if abs(player_1.x-(1920-player_2.x-100))**2 + abs(player_1.y-player_2.y)**2 <= 10000:
                 player_2.hp -= 10
             player_1.x=int(data[1:5])
             player_1.y=int(data[5:9])

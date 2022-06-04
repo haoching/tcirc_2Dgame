@@ -171,7 +171,7 @@ class Player_2(pygame.sprite.Sprite):
 def draw_blood(surf,hp, x, y):
     if hp < 0:
         hp = 0
-        draw_text(screen, 'SAO WIN', 300,  screen_width/2, screen_high/2.5)
+        draw_text(screen, 'player1 WIN', 300,  screen_width/2, screen_high/2.5)
     line_length = 300
     line_height = 20
     fill = (hp/100)*line_length
@@ -184,7 +184,7 @@ def draw_blood(surf,hp, x, y):
 def draw_blood2(surf, hp, x, y):
     if hp < 0:
         hp = 0
-        draw_text(screen, 'PRINCIPAL WIN', 300,  screen_width/2, screen_high/2.5)
+        draw_text(screen, 'player2 WIN', 300,  screen_width/2, screen_high/2.5)
     line_length = 300
     line_height = 20
     fill = (hp/100)*line_length

@@ -11,17 +11,6 @@ s.bind((HOST, PORT))
 print('server start at: %s:%s' % (HOST, PORT))
 print('wait for connection...')
 
-'''
-player_1_x = 1920 / 3
-player_1_y = 1080 - 200
-player_2_x = 1920 / 3 * 2
-player_2_y = 1080 - 200
-player_1_r = "r"
-player_2_r = "r"
-player_1_hp = 100
-player_2_hp = 100
-'''
-
 class player():
     address = 0
     x = 1920/3

@@ -3,7 +3,7 @@ import socket
 import threading
 
 #socket
-HOST = '0.0.0.0'
+HOST = '0.0.0.0' 
 PORT = 48763
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)#UDP
 s.bind((HOST, PORT))
@@ -35,14 +35,13 @@ while True:
 
 working = False
 
-def response(self):
-    while working == False:
-        s.sendto("connected".encode(), player_1.address)
-        s.sendto("connected".encode(), player_2.address)
+
+s.sendto("connected".encode(), player_1.address)
+s.sendto("connected".encode(), player_2.address)
 
 #多執行序
-t = threading.Thread(target=response, args=('Nash',))
-t.start() # 開始
+#t = threading.Thread(target=response, args=('Nash',))
+#t.start() # 開始
 
 #server邏輯
 while True:

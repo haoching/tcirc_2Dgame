@@ -4,7 +4,7 @@ import threading
 
 #socket
 HOST = '0.0.0.0' 
-PORT = 48763
+PORT = 9000
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)#UDP
 s.bind((HOST, PORT))
 

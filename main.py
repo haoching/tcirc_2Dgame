@@ -14,7 +14,7 @@ BLACK = (0, 0, 0)
 
 #socket
 HOST = '127.0.0.1'
-PORT = 48763
+PORT = 9000
 server_addr = (HOST, PORT)
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.sendto("connect".encode(), server_addr)
@@ -55,7 +55,7 @@ def draw_text(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, RED)
     text_rect = text_surface.get_rect()
-    text_rect.centerx = x
+    text_rect.centerx = x 
     text_rect.top = y
     surf.blit(text_surface, text_rect)
 
